@@ -40,3 +40,28 @@
 .read-the-docs {
   color: #888;
 }
+
+
+
+
+/*
+--steps--
+
+1. search cmd in windows search bar
+2. right click on command prompt and run as administrator
+3. change directory by writing drive name in lower case 
+   foe example: (for drive F:) write f:
+4. now navigate to the directory where the images are
+   example: if u want to go there F:/folder/hiddenFOlder/test type 
+   * cd folder/hiddenFOlder/test *
+5. check the user name from security tab for which access is denied
+6. in command prompt wirte ( icacls * /grant "userName:(OI)(CI)(F)" /T )
+   ( Replace userName with actual userName)
+
+   ------- BOOM !! --------
+      YOUR WORK IS DONE
+
+
+grant:  icacls * /grant "Authenticated Users:(OI)(CI)(F)" /T
+revoke: icacls * /inheritance:r /deny "Authenticated Users:(OI)(CI)(F)" /T
+*/
