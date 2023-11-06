@@ -1,0 +1,271 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "__Rest API's For test__",
+      "title": "Instrument Data Platform Rest API Swagger Documentation",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "httplocalhost/",
+        "description": "Common API base path address"
+      }
+    ],
+    "tags": [{
+        "name": "test CRUD",
+        "description": "CRUD Operation "
+      }],
+    "paths": {
+      "/getHierarchyTypeDetails": {
+        "get": {
+          "tags": ["test Crud"],
+          "description": "This API will be used to fetch all the hierarchy types available in system.",
+          "security": [
+            {
+              "Authorization": [],
+              "User-Role": []
+            }
+          ],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "statusCode": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "hierarchyTypeList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "hierarchy_type": {
+                              "type": "string"
+                            },
+                            "comment": {
+                              "type": "string"
+                            },
+                            "created_by": {
+                              "type": "string"
+                            },
+                            "created_on": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "updated_by": {
+                              "type": "string",
+                              "format": "nullable"
+                            },
+                            "updated_on": {
+                              "type": "string",
+                              "format": "nullable"
+                            }
+                          }
+                        }
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Failure",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/apiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": " Internal Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/internalServerError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/addPlants": {
+        "post": {
+          "tags": ["SuperAdminController"],
+          "description": "This API will be used to add New Plant in system.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "plantName": {
+                      "type": "string",
+                      "description": "The name of the Plant",
+                      "example": "test plant"
+                    },
+                    "country": {
+                      "type": "string",
+                      "description": "The name of the country",
+                      "example": "USA"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "Plant Id",
+                      "example": "123"
+                    },
+                    "regionId": {
+                      "type": "integer",
+                      "description": "Region Id",
+                      "example": 1
+                    },
+                    "sector": {
+                      "type": "string",
+                      "description": "The name of the sector",
+                      "example": "pharma"
+                    },
+                    "opco": {
+                      "type": "string",
+                      "description": "The name of the Opco",
+                      "example": "opco"
+                    },
+                    "secondaryOwner": {
+                      "type": "string",
+                      "description": "Email of the secondaryOwner",
+                      "example": "xyz@its.jnj.com"
+                    },
+                    "primaryOwner": {
+                      "type": "string",
+                      "description": "Email of the primaryOwner",
+                      "example": "xyz@its.jnj.com"
+                    },
+                    "createdBy": {
+                      "type": "string",
+                      "description": "Email of the createdBy",
+                      "example": "xyz@its.jnj.com"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the Plant",
+                      "example": "adding a test plant"
+                    },
+                    "eSignStatus": {
+                      "type": "string",
+                      "description": "Status of eSignature",
+                      "example": "Success"
+                    },
+                    "esignReasonId": {
+                      "type": "string",
+                      "description": "id of esignReason",
+                      "example": "2"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/apiResponse",
+                    "example": {
+                      "status": "Success",
+                      "statusCode": 200,
+                      "message": "Plant added successfully"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Failure",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/apiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internalServerError",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/internalServerError",
+                    "example": {
+                      "message": "Authentication failed",
+                      "status": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "Authorization": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
+        },
+        "User-Role": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "User-Role"
+        }
+      },
+      "schemas": {
+        "apiResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "statusCode": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "internalServerError": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            },
+            "status": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
+  
